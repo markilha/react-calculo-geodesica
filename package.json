@@ -1,0 +1,19 @@
+{
+  "name": "react-calculo-geodesica",
+  "version": "1.0.0",
+  "description": "Calculos geodesicos",
+  "main": "index.js",
+  "repository": "https://github.com/markilha/react-calculo-geodesica",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Marco Antonio",
+  "keywords": [
+    "Calculo distãncia entre dois pontos"   
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "assert": "^1.4.1",
+    "mocha": "^5.1.1"
+  }
+}
