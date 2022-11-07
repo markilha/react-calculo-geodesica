@@ -6,6 +6,14 @@ const datum = {
   Sad69: "Sad 69",
 };
 
+const numCasas={
+  nenhuma:0,
+  uma: 1,
+  duas: 2,
+  tres: 3,
+  quadro:4
+}
+
 //Calcula distância
 function calculaDistancia(lat1, lon1, lat2, lon2) {
   var deg2rad = 0.017453292519943295; // === Math.PI / 180
@@ -165,7 +173,7 @@ function CalculateArea(coordinates) {
   }
 }
 
-function CalculoAzimute(CoordInicial, CoorFinal,casas=0) {
+function CalculoAzimute(CoordInicial, CoorFinal,casas=numCasas.nenhuma) {
   var dx = 0;
   var dy = 0;
   var Azimute = "";
@@ -275,4 +283,5 @@ module.exports = {
   CalculoAzimute,
   FormataAngulo,
   datum,
+  numCasas
 };

@@ -87,19 +87,19 @@ describe('testando testando Azimute', () => {
   });
   test("Uma casa", () => {
     assert.equal(
-      calc.CalculoAzimute(coord,coord2,1), "287° 08' 01,9''" );
+      calc.CalculoAzimute(coord,coord2,calc.numCasas.uma), "287° 08' 01,9''" );
   });
   test("Duas casas", () => {
     assert.equal(
-      calc.CalculoAzimute(coord,coord2,2), "287° 08' 01,94''" );
+      calc.CalculoAzimute(coord,coord2,calc.numCasas.duas), "287° 08' 01,94''" );
   });
   test("Três casas", () => {
     assert.equal(
-      calc.CalculoAzimute(coord,coord2,3), "287° 08' 01,945''");
+      calc.CalculoAzimute(coord,coord2,calc.numCasas.tres), "287° 08' 01,945''");
   });
   test("Quatro casas", () => {
     assert.equal(
-      calc.CalculoAzimute(coord,coord2,4), "287° 08' 01,9452''" );
+      calc.CalculoAzimute(coord,coord2,calc.numCasas.quadro), "287° 08' 01,9452''" );
   });
 })
 
