@@ -170,6 +170,11 @@ path-is-absolute@^1.0.0:
   resolved "https://registry.yarnpkg.com/path-is-absolute/-/path-is-absolute-1.0.1.tgz#174b9268735534ffbc7ace6bf53a5a9e1b5c5f5f"
   integrity sha512-AVbw3UJ2e9bq64vSaS9Am0fje1Pa8pbGqTTsmXfaIiMpnr5DlDhfJOuLj9Sf95ZPVDAUerDfEk88MPmPe7UCQg==
 
+react-calculo-geodesica@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/react-calculo-geodesica/-/react-calculo-geodesica-0.1.1.tgz#962ffd64a7e18335d4e656298245d9aed6561179"
+  integrity sha512-6BrfiH0JpYUpiNQ/scBXFLMFnZ/9Cn58/fhlJloU6tAhE5fofIIeg9+qsggk/Lm+n7tKgVuQz9ak3R3jelVFZg==
+
 supports-color@5.4.0:
   version "5.4.0"
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-5.4.0.tgz#1c6b337402c2137605efe19f10fec390f6faab54"

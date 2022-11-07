@@ -23,3 +23,16 @@ test("testantdo calculo de distância", () => {
     "5375.831344658761"
   );
 });
+
+// test("testantdo Converter utim", () => {
+//   assert.equal(calc.ConverterUtm(-24.009166667521, -48.336666666667), `{
+//     Hemisfério: "S",
+//     Achamento: 0.003352810681238051,
+//     Excentricidade: 0.006739496775591553,
+//     Fuso: 22,
+//     Meridiano: -51,
+//     Semi_eixo: 6378137,
+//     X_Este: 770937.020773682,
+//     Y_Norte: 7342195.1680566855,
+//   }`);
+// });
