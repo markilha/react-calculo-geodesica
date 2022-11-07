@@ -20,6 +20,14 @@ function getRadiano(deg) {
   return rad;
 }
 
+//convert radianos em graus
+function getGraus(rad) {
+  var grau = (rad * 180) / Math.PI;
+  return grau;
+}
+
+//Converter coordenadas Grau decimal em UTM
+
 function ConverterUtm(
   lat = -24.009166667521,
   lng = -48.336666666667,
@@ -99,7 +107,52 @@ function ConverterUtm(
   return result;
 }
 
+//Retorna o um objeto contendo o Fuso e o Merediano central de um coordenada longitude
+function getFusoMerediano(lng) {
+  let Fuso = parseInt(lng / 6 + 31);
+  let MC = 6 * Fuso - 183;
+  return JSON.stringify({ Fuso: Fuso, Merediano: MC });
+}
+
+function polygonArea(CoordX, CoordY, n) {
+  let X = 0.0;
+  let Y = 0.0;
+  let area = 0.0;
+
+  for (let i = 0; i < n; i++) {
+    let CX = CoordX[i];
+    let CY = CoordY[i];
+    let CX2 = CoordX[i + 1];
+    let CY2 = CoordY[i + 1];
+
+    X += CX * CY2;
+    Y += CY * CX2;
+  }
+  area = Math.abs(X - Y);
+  area = area / 2;
+  return area;
+}
+
+//Calcula a área de um array de coordenadas de um poligono
+function CalculateArea(coordinates) {
+  if (coordinates) {
+    let X = [];
+    let Y = [];
+    coordinates.map((coord) => {
+      let xy = ConverterUtm(coord[0], coord[1]);
+      X.push(xy.X_Este);
+      Y.push(xy.Y_Norte);
+    });
+
+    return polygonArea(X, Y, X.length - 1);
+  }
+}
+
 module.exports = {
   calculaDistancia,
   ConverterUtm,
+  getRadiano,
+  getGraus,
+  getFusoMerediano,
+  CalculateArea,
 };
