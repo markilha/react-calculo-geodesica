@@ -23,7 +23,7 @@ import geo from "react-calculo-geodesica";
 ```
 
 ```js
-geo.ConverterUtm(-24.009166667521, -48.336666666667);
+geo.ConverterUtm(-24.009166667521, -48.336666666667, geo.datum.sirgas);
 // 'convert um coordenada geográfica decimal em utm . Retornando um objeto:
 // {
 //     Hemisfério: "S",
@@ -79,3 +79,13 @@ geo.CalculateArea(coord);
 | getGraus         | coordenada radiano                      | doble | Retorna grau decimal(double) |
 | getFusoMerediano | coordenada longitude grau decimal       | doble | Retorna objeto json          |
 | CalculateArea    | array de coordenadas                    | doble | Retorna a área (double)      |
+
+## Datum
+
+sirgas: "Sirgas 2000",
+WGS84: "WGS 84",
+Sad69: "Sad 69",
+
+## Licença
+
+MIT License - Copyright (c) 2022 Markilha

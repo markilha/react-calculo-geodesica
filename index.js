@@ -1,3 +1,11 @@
+const { match } = require("assert");
+
+const datum = {
+  sirgas: "Sirgas 2000",
+  WGS84: "WGS 84",
+  Sad69: "Sad 69",
+};
+
 //Calcula distância
 function calculaDistancia(lat1, lon1, lat2, lon2) {
   var deg2rad = 0.017453292519943295; // === Math.PI / 180
@@ -31,7 +39,7 @@ function getGraus(rad) {
 function ConverterUtm(
   lat = -24.009166667521,
   lng = -48.336666666667,
-  Datum = "Sirgas 2000"
+  Datum = datum.sirgas
 ) {
   //48 20 12 , 24 00 33 => -48,336666666667,-24,009166667521 => 770937.0205586,7342195.1505635
 
@@ -50,7 +58,16 @@ function ConverterUtm(
       a = 6378137.0;
       b = 6356752.31414;
       f = 1 / 298.257222101;
-
+      break;
+    case "Sad 69":
+      a = 6378160.0;
+      b = 6356774.56;
+      f = 1 / 298.257222101;
+      break;
+    case "WGS 84":
+      a = 6378137.0;
+      b = 6356752.3142;
+      f = 1 / 298.257223563;
       break;
     default:
       a = 6378137.0;
@@ -148,6 +165,106 @@ function CalculateArea(coordinates) {
   }
 }
 
+function CalculoAzimute(CoordInicial, CoorFinal,casas=0) {
+  var dx = 0;
+  var dy = 0;
+  var Azimute = "";
+  dx = CoorFinal[0] - CoordInicial[0];  
+  dy = CoorFinal[1] - CoordInicial[1];
+
+  if (dx === 0 && dy === 0) {
+    throw new Error(`Existe Distância Zerada....`);
+  }
+
+  var rprov1 = Math.atan(dx / dy) * (180 / Math.PI) * Math.sign(dx / dy);
+  var azprov1 = rprov1;
+  var azprov2 = 180 - rprov1;
+  var azprov3 = 180 + rprov1;
+  var azprov4 = 360 - rprov1;
+
+  var azprov1b = ((Math.trunc(azprov1 * Math.sign(azprov1)) + (Math.trunc((azprov1 - (Math.trunc(azprov1 * Math.sign(azprov1)) * Math.sign(azprov1))) * 60 * Math.sign(azprov1))) / 100) + (((azprov1 - (Math.trunc(azprov1 * Math.sign(azprov1)) * Math.sign(azprov1))) * 60 * Math.sign(azprov1) - Math.trunc((azprov1 - (Math.trunc(azprov1 * Math.sign(azprov1)) * Math.sign(azprov1))) * 60 * Math.sign(azprov1))) * 60 / 10000)) * Math.sign(azprov1);
+  var azprov2b = ((Math.trunc(azprov2 * Math.sign(azprov2)) + (Math.trunc((azprov2 - (Math.trunc(azprov2 * Math.sign(azprov2)) * Math.sign(azprov2))) * 60 * Math.sign(azprov2))) / 100) + (((azprov2 - (Math.trunc(azprov2 * Math.sign(azprov2)) * Math.sign(azprov2))) * 60 * Math.sign(azprov2) - Math.trunc((azprov2 - (Math.trunc(azprov2 * Math.sign(azprov2)) * Math.sign(azprov2))) * 60 * Math.sign(azprov2))) * 60 / 10000)) * Math.sign(azprov2);
+  var azprov3b = ((Math.trunc(azprov3 * Math.sign(azprov3)) + (Math.trunc((azprov3 - (Math.trunc(azprov3 * Math.sign(azprov3)) * Math.sign(azprov3))) * 60 * Math.sign(azprov3))) / 100) + (((azprov3 - (Math.trunc(azprov3 * Math.sign(azprov3)) * Math.sign(azprov3))) * 60 * Math.sign(azprov3) - Math.trunc((azprov3 - (Math.trunc(azprov3 * Math.sign(azprov3)) * Math.sign(azprov3))) * 60 * Math.sign(azprov3))) * 60 / 10000)) * Math.sign(azprov3);
+  var azprov4b = ((Math.trunc(azprov4 * Math.sign(azprov4)) + (Math.trunc((azprov4 - (Math.trunc(azprov4 * Math.sign(azprov4)) * Math.sign(azprov4))) * 60 * Math.sign(azprov4))) / 100) + (((azprov4 - (Math.trunc(azprov4 * Math.sign(azprov4)) * Math.sign(azprov4))) * 60 * Math.sign(azprov4) - Math.trunc((azprov4 - (Math.trunc(azprov4 * Math.sign(azprov4)) * Math.sign(azprov4))) * 60 * Math.sign(azprov4))) * 60 / 10000)) * Math.sign(azprov4);
+
+  var azprov1bf = FormataAngulo(azprov1b,casas);
+  var azprov2bf = FormataAngulo(azprov2b,casas);
+  var azprov3bf = FormataAngulo(azprov3b,casas);
+  var azprov4bf = FormataAngulo(azprov4b,casas);
+
+  
+ 
+  if (dy > 0 && dx > 0) {
+    Azimute = azprov1bf;
+  }
+  if (dy < 0 && dx > 0) {
+    Azimute = azprov2bf;
+  }
+  if (dy < 0 && dx < 0) {
+    Azimute = azprov3bf;
+  }
+  if (dy > 0 && dx < 0) {
+    Azimute = azprov4bf;
+  }
+
+  //Casos especiais no cálculo do Azimute
+  if (dx < 0 && dy == 0)
+  {
+      Azimute = "270°";
+      cl_Variaveis.Azimute = "270";
+  }
+  //Casos especiais no cálculo do Azimute
+  if (dx < 0 && dy == 0) {
+    Azimute = "270°";  
+  }
+  if (dx > 0 && dy == 0) {
+    Azimute = "90°";  
+  }
+  if (dx == 0 && dy > 0) {
+    Azimute = "0°";
+  
+  }
+  if (dx == 0 && dy < 0) {
+    Azimute = "180°";  
+  }
+  return Azimute;
+}
+
+
+
+
+function FormataAngulo(valor, casas) {
+
+  var vetor = valor.toString().split(".");
+  var grau = vetor[0].toString();
+  var minuto = vetor[1].toString().substring(0, 2);
+  var segundo = vetor[1].toString().substring(2, 8);
+
+  switch (casas) {
+    case 0:
+      segundo = segundo.substring(0, 2);
+      break;
+    case 1:
+      segundo = `${segundo.substring(0, 2)},${segundo.substring(2, 3)}`;
+      break;
+    case 2:
+      segundo = `${segundo.substring(0, 2)},${segundo.substring(2, 4)}`;
+      break;
+    case 3:
+      segundo = `${segundo.substring(0, 2)},${segundo.substring(2, 5)}`;
+      break;
+    case 4:
+      segundo = `${segundo.substring(0, 2)},${segundo.substring(2, 6)}`;
+      break;
+  }
+
+
+  return  `${grau}° ${minuto}' ${segundo}''`;  
+}
+
+
+
+
 module.exports = {
   calculaDistancia,
   ConverterUtm,
@@ -155,4 +272,7 @@ module.exports = {
   getGraus,
   getFusoMerediano,
   CalculateArea,
+  CalculoAzimute,
+  FormataAngulo,
+  datum,
 };

@@ -46,21 +46,63 @@ test("testantdo retornar a area de um poligono", () => {
   );
 });
 
-test("testantdo Converter utm", () => {
+test("testantdo Converter utm sirgas", () => {
   assert.equal(
-    JSON.stringify(calc.ConverterUtm(-24.009166667521, -48.336666666667)),
+    JSON.stringify(
+      calc.ConverterUtm(-24.009166667521, -48.336666666667, calc.datum.sirgas)
+    ),
     '{"Hemisfério":"S","Fuso":22,"Meridiano":-51,"Semi_eixo":6378137,"Excentricidade":0.006739496775591553,"Achamento":0.003352810681238051,"X_Este":770937.020773682,"Y_Norte":7342195.1680566855}'
+  );
+});
+
+test("testantdo Converter utm wgs 84", () => {
+  assert.equal(
+    JSON.stringify(
+      calc.ConverterUtm(-24.009166667521, -48.336666666667, calc.datum.WGS84)
+    ),
+    '{"Hemisfério":"S","Fuso":22,"Meridiano":-51,"Semi_eixo":6378137,"Excentricidade":0.006739496775591553,"Achamento":0.0033528106718309896,"X_Este":770937.020773682,"Y_Norte":7342195.1680566855}'
   );
 });
 
 //Calcula a área de um array de coordenadas de um poligono
 const coord = [
-  [-49.4658297275725, -23.7057909679787, 0],
-  [-49.4659128408675, -23.7057745926662, 0],
-  [-49.465879518788, -23.7056305180162, 0],
-  [-49.4657969904007, -23.7056420639345, 0],
-  [-49.4658297275725, -23.7057909679787, 0],
+  [-23.7057909679787, -49.4658297275725],
+  [-23.7057745926662, -49.4659128408675],
+  [-23.7056305180162, -49.465879518788],
+  [-23.7056420639345, -49.4657969904007],
+  [-23.7057909679787, -49.4658297275725],
 ];
 test("testantdo calculo de área", () => {
-  assert.equal(calc.CalculateArea(coord), 101.54248046875);
+  assert.equal(calc.CalculateArea(coord), 142.212890625);
 });
+
+//Calcular o azimute
+describe('testando testando Azimute', () => {
+  const coord = [770937.020773682, 7342195.1680566855]
+  const coord2 =  [656399.0835560936, 7377505.776444826]
+
+  test("Nenhum casa", () => {
+    assert.equal(
+      calc.CalculoAzimute(coord,coord2), "287° 08' 01''");
+  });
+  test("Uma casa", () => {
+    assert.equal(
+      calc.CalculoAzimute(coord,coord2,1), "287° 08' 01,9''" );
+  });
+  test("Duas casas", () => {
+    assert.equal(
+      calc.CalculoAzimute(coord,coord2,2), "287° 08' 01,94''" );
+  });
+  test("Três casas", () => {
+    assert.equal(
+      calc.CalculoAzimute(coord,coord2,3), "287° 08' 01,945''");
+  });
+  test("Quatro casas", () => {
+    assert.equal(
+      calc.CalculoAzimute(coord,coord2,4), "287° 08' 01,9452''" );
+  });
+})
+
+
+
+
