@@ -49,7 +49,7 @@ test("testantdo retornar a area de um poligono", () => {
 test("testantdo Converter utm sirgas", () => {
   assert.equal(
     JSON.stringify(
-      calc.ConverterUtm(-24.009166667521, -48.336666666667, calc.datum.sirgas)
+      calc.converterUtm(-24.009166667521, -48.336666666667, calc.datum.sirgas)
     ),
     '{"Hemisfério":"S","Fuso":22,"Meridiano":-51,"Semi_eixo":6378137,"Excentricidade":0.006739496775591553,"Achamento":0.003352810681238051,"X_Este":770937.020773682,"Y_Norte":7342195.1680566855}'
   );
@@ -58,7 +58,7 @@ test("testantdo Converter utm sirgas", () => {
 test("testantdo Converter utm wgs 84", () => {
   assert.equal(
     JSON.stringify(
-      calc.ConverterUtm(-24.009166667521, -48.336666666667, calc.datum.WGS84)
+      calc.converterUtm(-24.009166667521, -48.336666666667, calc.datum.WGS84)
     ),
     '{"Hemisfério":"S","Fuso":22,"Meridiano":-51,"Semi_eixo":6378137,"Excentricidade":0.006739496775591553,"Achamento":0.0033528106718309896,"X_Este":770937.020773682,"Y_Norte":7342195.1680566855}'
   );
@@ -73,36 +73,59 @@ const coord = [
   [-23.7057909679787, -49.4658297275725],
 ];
 test("testantdo calculo de área", () => {
-  assert.equal(calc.CalculateArea(coord), 142.212890625);
+  assert.equal(calc.calculateArea(coord), 142.212890625);
 });
 
 //Calcular o azimute
-describe('testando testando Azimute', () => {
-  const coord = [770937.020773682, 7342195.1680566855]
-  const coord2 =  [656399.0835560936, 7377505.776444826]
+describe("testando testando Azimute", () => {
+  const coord = [770937.020773682, 7342195.1680566855];
+  const coord2 = [656399.0835560936, 7377505.776444826];
 
   test("Nenhum casa", () => {
-    assert.equal(
-      calc.CalculoAzimute(coord,coord2), "287° 08' 01''");
+    assert.equal(calc.calculoAzimute(coord, coord2), "287° 08' 01''");
   });
   test("Uma casa", () => {
     assert.equal(
-      calc.CalculoAzimute(coord,coord2,calc.numCasas.uma), "287° 08' 01,9''" );
+      calc.calculoAzimute(coord, coord2, calc.numCasas.uma),
+      "287° 08' 01,9''"
+    );
   });
   test("Duas casas", () => {
     assert.equal(
-      calc.CalculoAzimute(coord,coord2,calc.numCasas.duas), "287° 08' 01,94''" );
+      calc.calculoAzimute(coord, coord2, calc.numCasas.duas),
+      "287° 08' 01,94''"
+    );
   });
   test("Três casas", () => {
     assert.equal(
-      calc.CalculoAzimute(coord,coord2,calc.numCasas.tres), "287° 08' 01,945''");
+      calc.calculoAzimute(coord, coord2, calc.numCasas.tres),
+      "287° 08' 01,945''"
+    );
   });
   test("Quatro casas", () => {
     assert.equal(
-      calc.CalculoAzimute(coord,coord2,calc.numCasas.quadro), "287° 08' 01,9452''" );
+      calc.calculoAzimute(coord, coord2, calc.numCasas.quadro),
+      "287° 08' 01,9452''"
+    );
   });
-})
+});
 
+test("Testando ponto médio: ", () => {
+  const coord = [770937.020773682, 7342195.1680566855];
+  const coord2 = [656399.0835560936, 7377505.776444826];
+  assert.equal(    
+    calc.pontoMedio(coord, coord2).toString()
+    ,
+    [
+      7359850.472250756,
+      7359850.472250756
+    ]
+  );
+});
 
-
-
+test("Converter GMS em Graus Decimal", () => {
+  assert.equal(
+    calc.convertGMS_Dec(),
+    287.13387222222224
+  );
+});

@@ -1,4 +1,3 @@
-const { match } = require("assert");
 
 const datum = {
   sirgas: "Sirgas 2000",
@@ -6,13 +5,13 @@ const datum = {
   Sad69: "Sad 69",
 };
 
-const numCasas={
-  nenhuma:0,
+const numCasas = {
+  nenhuma: 0,
   uma: 1,
   duas: 2,
   tres: 3,
-  quadro:4
-}
+  quadro: 4,
+};
 
 //Calcula distância
 function calculaDistancia(lat1, lon1, lat2, lon2) {
@@ -44,7 +43,7 @@ function getGraus(rad) {
 
 //Converter coordenadas Grau decimal em UTM
 
-function ConverterUtm(
+function converterUtm(
   lat = -24.009166667521,
   lng = -48.336666666667,
   Datum = datum.sirgas
@@ -159,12 +158,12 @@ function polygonArea(CoordX, CoordY, n) {
 }
 
 //Calcula a área de um array de coordenadas de um poligono
-function CalculateArea(coordinates) {
+function calculateArea(coordinates) {
   if (coordinates) {
     let X = [];
     let Y = [];
     coordinates.map((coord) => {
-      let xy = ConverterUtm(coord[0], coord[1]);
+      let xy = converterUtm(coord[0], coord[1]);
       X.push(xy.X_Este);
       Y.push(xy.Y_Norte);
     });
@@ -173,11 +172,11 @@ function CalculateArea(coordinates) {
   }
 }
 
-function CalculoAzimute(CoordInicial, CoorFinal,casas=numCasas.nenhuma) {
+function calculoAzimute(CoordInicial, CoorFinal, casas = numCasas.nenhuma) {
   var dx = 0;
   var dy = 0;
   var Azimute = "";
-  dx = CoorFinal[0] - CoordInicial[0];  
+  dx = CoorFinal[0] - CoordInicial[0];
   dy = CoorFinal[1] - CoordInicial[1];
 
   if (dx === 0 && dy === 0) {
@@ -190,18 +189,100 @@ function CalculoAzimute(CoordInicial, CoorFinal,casas=numCasas.nenhuma) {
   var azprov3 = 180 + rprov1;
   var azprov4 = 360 - rprov1;
 
-  var azprov1b = ((Math.trunc(azprov1 * Math.sign(azprov1)) + (Math.trunc((azprov1 - (Math.trunc(azprov1 * Math.sign(azprov1)) * Math.sign(azprov1))) * 60 * Math.sign(azprov1))) / 100) + (((azprov1 - (Math.trunc(azprov1 * Math.sign(azprov1)) * Math.sign(azprov1))) * 60 * Math.sign(azprov1) - Math.trunc((azprov1 - (Math.trunc(azprov1 * Math.sign(azprov1)) * Math.sign(azprov1))) * 60 * Math.sign(azprov1))) * 60 / 10000)) * Math.sign(azprov1);
-  var azprov2b = ((Math.trunc(azprov2 * Math.sign(azprov2)) + (Math.trunc((azprov2 - (Math.trunc(azprov2 * Math.sign(azprov2)) * Math.sign(azprov2))) * 60 * Math.sign(azprov2))) / 100) + (((azprov2 - (Math.trunc(azprov2 * Math.sign(azprov2)) * Math.sign(azprov2))) * 60 * Math.sign(azprov2) - Math.trunc((azprov2 - (Math.trunc(azprov2 * Math.sign(azprov2)) * Math.sign(azprov2))) * 60 * Math.sign(azprov2))) * 60 / 10000)) * Math.sign(azprov2);
-  var azprov3b = ((Math.trunc(azprov3 * Math.sign(azprov3)) + (Math.trunc((azprov3 - (Math.trunc(azprov3 * Math.sign(azprov3)) * Math.sign(azprov3))) * 60 * Math.sign(azprov3))) / 100) + (((azprov3 - (Math.trunc(azprov3 * Math.sign(azprov3)) * Math.sign(azprov3))) * 60 * Math.sign(azprov3) - Math.trunc((azprov3 - (Math.trunc(azprov3 * Math.sign(azprov3)) * Math.sign(azprov3))) * 60 * Math.sign(azprov3))) * 60 / 10000)) * Math.sign(azprov3);
-  var azprov4b = ((Math.trunc(azprov4 * Math.sign(azprov4)) + (Math.trunc((azprov4 - (Math.trunc(azprov4 * Math.sign(azprov4)) * Math.sign(azprov4))) * 60 * Math.sign(azprov4))) / 100) + (((azprov4 - (Math.trunc(azprov4 * Math.sign(azprov4)) * Math.sign(azprov4))) * 60 * Math.sign(azprov4) - Math.trunc((azprov4 - (Math.trunc(azprov4 * Math.sign(azprov4)) * Math.sign(azprov4))) * 60 * Math.sign(azprov4))) * 60 / 10000)) * Math.sign(azprov4);
+  var azprov1b =
+    (Math.trunc(azprov1 * Math.sign(azprov1)) +
+      Math.trunc(
+        (azprov1 -
+          Math.trunc(azprov1 * Math.sign(azprov1)) * Math.sign(azprov1)) *
+          60 *
+          Math.sign(azprov1)
+      ) /
+        100 +
+      (((azprov1 -
+        Math.trunc(azprov1 * Math.sign(azprov1)) * Math.sign(azprov1)) *
+        60 *
+        Math.sign(azprov1) -
+        Math.trunc(
+          (azprov1 -
+            Math.trunc(azprov1 * Math.sign(azprov1)) * Math.sign(azprov1)) *
+            60 *
+            Math.sign(azprov1)
+        )) *
+        60) /
+        10000) *
+    Math.sign(azprov1);
+  var azprov2b =
+    (Math.trunc(azprov2 * Math.sign(azprov2)) +
+      Math.trunc(
+        (azprov2 -
+          Math.trunc(azprov2 * Math.sign(azprov2)) * Math.sign(azprov2)) *
+          60 *
+          Math.sign(azprov2)
+      ) /
+        100 +
+      (((azprov2 -
+        Math.trunc(azprov2 * Math.sign(azprov2)) * Math.sign(azprov2)) *
+        60 *
+        Math.sign(azprov2) -
+        Math.trunc(
+          (azprov2 -
+            Math.trunc(azprov2 * Math.sign(azprov2)) * Math.sign(azprov2)) *
+            60 *
+            Math.sign(azprov2)
+        )) *
+        60) /
+        10000) *
+    Math.sign(azprov2);
+  var azprov3b =
+    (Math.trunc(azprov3 * Math.sign(azprov3)) +
+      Math.trunc(
+        (azprov3 -
+          Math.trunc(azprov3 * Math.sign(azprov3)) * Math.sign(azprov3)) *
+          60 *
+          Math.sign(azprov3)
+      ) /
+        100 +
+      (((azprov3 -
+        Math.trunc(azprov3 * Math.sign(azprov3)) * Math.sign(azprov3)) *
+        60 *
+        Math.sign(azprov3) -
+        Math.trunc(
+          (azprov3 -
+            Math.trunc(azprov3 * Math.sign(azprov3)) * Math.sign(azprov3)) *
+            60 *
+            Math.sign(azprov3)
+        )) *
+        60) /
+        10000) *
+    Math.sign(azprov3);
+  var azprov4b =
+    (Math.trunc(azprov4 * Math.sign(azprov4)) +
+      Math.trunc(
+        (azprov4 -
+          Math.trunc(azprov4 * Math.sign(azprov4)) * Math.sign(azprov4)) *
+          60 *
+          Math.sign(azprov4)
+      ) /
+        100 +
+      (((azprov4 -
+        Math.trunc(azprov4 * Math.sign(azprov4)) * Math.sign(azprov4)) *
+        60 *
+        Math.sign(azprov4) -
+        Math.trunc(
+          (azprov4 -
+            Math.trunc(azprov4 * Math.sign(azprov4)) * Math.sign(azprov4)) *
+            60 *
+            Math.sign(azprov4)
+        )) *
+        60) /
+        10000) *
+    Math.sign(azprov4);
 
-  var azprov1bf = FormataAngulo(azprov1b,casas);
-  var azprov2bf = FormataAngulo(azprov2b,casas);
-  var azprov3bf = FormataAngulo(azprov3b,casas);
-  var azprov4bf = FormataAngulo(azprov4b,casas);
+  var azprov1bf = formataAngulo(azprov1b, casas);
+  var azprov2bf = formataAngulo(azprov2b, casas);
+  var azprov3bf = formataAngulo(azprov3b, casas);
+  var azprov4bf = formataAngulo(azprov4b, casas);
 
-  
- 
   if (dy > 0 && dx > 0) {
     Azimute = azprov1bf;
   }
@@ -216,33 +297,27 @@ function CalculoAzimute(CoordInicial, CoorFinal,casas=numCasas.nenhuma) {
   }
 
   //Casos especiais no cálculo do Azimute
-  if (dx < 0 && dy == 0)
-  {
-      Azimute = "270°";
-      cl_Variaveis.Azimute = "270";
+  if (dx < 0 && dy == 0) {
+    Azimute = "270°";
+    cl_Variaveis.Azimute = "270";
   }
   //Casos especiais no cálculo do Azimute
   if (dx < 0 && dy == 0) {
-    Azimute = "270°";  
+    Azimute = "270°";
   }
   if (dx > 0 && dy == 0) {
-    Azimute = "90°";  
+    Azimute = "90°";
   }
   if (dx == 0 && dy > 0) {
     Azimute = "0°";
-  
   }
   if (dx == 0 && dy < 0) {
-    Azimute = "180°";  
+    Azimute = "180°";
   }
   return Azimute;
 }
 
-
-
-
-function FormataAngulo(valor, casas) {
-
+function formataAngulo(valor, casas) {
   var vetor = valor.toString().split(".");
   var grau = vetor[0].toString();
   var minuto = vetor[1].toString().substring(0, 2);
@@ -266,22 +341,65 @@ function FormataAngulo(valor, casas) {
       break;
   }
 
-
-  return  `${grau}° ${minuto}' ${segundo}''`;  
+  return `${grau}° ${minuto}' ${segundo}''`;
 }
 
+//Retorna o ponto médio entre duas coordenadas
 
+function pontoMedio(CoordInicial, CoordFinal) {
+  var pmX = 0;
+  var pmY = 0;
+  pmX = (CoordInicial[0] + CoordFinal[0]) / 2;
+  pmY = (CoordInicial[1] + CoordFinal[1]) / 2;
+  return [pmY, pmY];
+}
 
+//Convert GMS em Graus decimais 287° 08' 01,94
+function convertGMS_Dec(Azimute = "287° 08' 01,94''") {
+  var GrauDecimal = 0.0;
+  if (Azimute.includes(".")) {
+    var vetor = Azimute.split(".");
+    var grau = vetor[0];
+    grau = parseFloat(grau);
+    var minuto = vetor[1].toString().substring(0, 2);
+    minuto = parseFloat(minuto) / 60;
+    var segundo = vetor[1].toString().substring(2, 4);
+    segundo = parseFloat(segundo) / 3600;
+    GrauDecimal = grau + minuto + segundo;
+  } else {
+    var vetor = Azimute.split("°");
+    var graus = apenasNumeros(vetor[0]);
+    var vetorMS = vetor[1].split("'");
+    var minutos = apenasNumeros(vetorMS[0]);
+    var segundos = vetorMS[1].replace(",", ".").replace("''", "");
+    segundos = segundos.trim();
+    minutos = minutos / 60;
+    segundos = segundos / 3600;
+    GrauDecimal = graus + minutos + segundos;
+  }
+  return GrauDecimal;
+}
+
+function apenasNumeros(string) {
+  var numsStr = string.replace(/[^0-9]/g, "");
+  return parseInt(numsStr);
+}
+
+function formatarValor(valor) {
+  return valor.toLocaleString("pt-BR");
+}
 
 module.exports = {
   calculaDistancia,
-  ConverterUtm,
+  converterUtm,
   getRadiano,
   getGraus,
   getFusoMerediano,
-  CalculateArea,
-  CalculoAzimute,
-  FormataAngulo,
+  calculateArea,
+  calculoAzimute,
+  formataAngulo,
+  pontoMedio,
+  convertGMS_Dec,
   datum,
-  numCasas
+  numCasas,
 };

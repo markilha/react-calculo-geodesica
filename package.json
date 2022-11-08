@@ -1,6 +1,6 @@
 {
-  "name": "react-calculo-geodesica",
-  "version": "1.0.5",
+  "name": "react-calculo-geodesico",
+  "version": "1.0.0",
   "description": "Calculos geodesicos",
   "main": "index.js",
   "repository": "https://github.com/markilha/react-calculo-geodesica",
@@ -9,18 +9,18 @@
   },
   "author": "Marco Antonio",
   "keywords": [
-    " Calculo de distância",
+    "Calculo de distância",
     "Calculo de área",
     "Converter Radianos",
     "Converter Graus",
-    "Converter coordenadas utm"
+    "Converter coordenadas utm",
+    "Ponto medio entre duas coordeanadas",
+    "converter grau minuto e segundo em graus decimais"
   ],
   "license": "MIT",
   "devDependencies": {
     "assert": "^1.4.1",
     "mocha": "^5.1.1"
   },
-  "dependencies": {
-    "react-calculo-geodesica": "^0.1.1"
-  }
+  "dependencies": {}
 }

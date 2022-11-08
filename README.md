@@ -2,16 +2,16 @@
 
 Componente React para calculo geodésicos
 
-[![npm](https://img.shields.io/npm/v/react-calculo-geodesica)](https://www.npmjs.com/package/react-calculo-geodesica) ![NPM](https://img.shields.io/npm/l/react-calculo-geodesica)
+[![npm](https://img.shields.io/npm/v/react-calculo-geodesico)](https://www.npmjs.com/package/react-calculo-geodesico) ![NPM](https://img.shields.io/npm/l/react-calculo-geodesico)
 
 ## Como instalar
 
 Abaixo as formas de como instalar essa biblioteca utilizando o npm ou yarn:
 
 ```
-npm install react-calculo-geodesica
+npm install react-calculo-geodesico
 # ou
-yarn add react-calculo-geodesica
+yarn add react-calculo-geodesico
 ```
 
 ## Como usar
@@ -23,7 +23,7 @@ import geo from "react-calculo-geodesica";
 ```
 
 ```js
-geo.ConverterUtm(-24.009166667521, -48.336666666667, geo.datum.sirgas);
+geo.converterUtm(-24.009166667521, -48.336666666667, geo.datum.sirgas);
 // 'convert um coordenada geográfica decimal em utm . Retornando um objeto:
 // {
 //     Hemisfério: "S",
@@ -65,26 +65,46 @@ const coord = [
   [-49.4658297275725, -23.7057909679787, 0],
 ];
 
-geo.CalculateArea(coord);
+geo.calculateArea(coord);
 //Calcula a área de um array de coordenadas de um poligono
+
+geo.calculoAzimute(coord, coord2, geo.numCasas.tres);
+//calculo o azimute entre duas coordenadas
+
+geo.pontoMedio(coord, coord2);
+//retorna  o ponto médio entre duas coordenadas
+
+geo.convertGMS_Dec("287° 08' 01,94''");
+//Converte o Grau minutos e Segundos em Grau decimaisl
 ```
 
 ## Propriedades
 
-| Propriedade      | Entrada                                 | Tipo  | Descrição                    |
-| ---------------- | --------------------------------------- | ----- | ---------------------------- |
-| ConverterUtm     | latitude,longitude                      | doble | Retorna um objeto            |
-| calculaDistancia | latitude,longitude,latitude2,longitude2 | doble | Retorna distância (double)   |
-| getRadiano       | coordenada graus decimal                | doble | Retorna grau radiano(double) |
-| getGraus         | coordenada radiano                      | doble | Retorna grau decimal(double) |
-| getFusoMerediano | coordenada longitude grau decimal       | doble | Retorna objeto json          |
-| CalculateArea    | array de coordenadas                    | doble | Retorna a área (double)      |
+| Propriedade      | Entrada                                 | Tipo   | Descrição                                |
+| ---------------- | --------------------------------------- | ------ | ---------------------------------------- |
+| converterUtm     | latitude,longitude                      | doble  | Retorna um objeto                        |
+| calculaDistancia | latitude,longitude,latitude2,longitude2 | doble  | Retorna distância (double)               |
+| getRadiano       | coordenada graus decimal                | doble  | Retorna grau radiano(double)             |
+| getGraus         | coordenada radiano                      | doble  | Retorna grau decimal(double)             |
+| getFusoMerediano | coordenada longitude grau decimal       | doble  | Retorna objeto json                      |
+| calculateArea    | array de coordenadas                    | doble  | Retorna a área (double)                  |
+| calcula Azimute  | array de coordeanadas                   | doble  | Retorna a Azimute (string)               |
+| pontoMedio       | array de coordeanadas                   | doble  | Retorna a ponto médio (array coordenada) |
+| convertGMS_Dec   | coordenada grau minutos e segundo       | string | Retorna a grau decimal (double)          |
 
-## Datum
+# geo.datum
 
 sirgas: "Sirgas 2000",
 WGS84: "WGS 84",
 Sad69: "Sad 69",
+
+# geo.numCasas
+
+nenhuma: 0,
+uma: 1,
+duas: 2,
+tres: 3,
+quadro: 4
 
 ## Licença
 
