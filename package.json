@@ -1,6 +1,6 @@
 {
   "name": "react-calculo-geodesico",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Calculos geodesicos",
   "main": "index.js",
   "repository": "https://github.com/markilha/react-calculo-geodesica",

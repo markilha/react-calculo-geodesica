@@ -36,13 +36,8 @@ geo.converterUtm(-24.009166667521, -48.336666666667, geo.datum.sirgas);
 //     Y_Norte: 7342195.1680566855,
 // }
 
-geo.calculaDistancia(
-  -23.985921638598054,
-  -48.36790508155105,
-  -24.013992511362666,
-  -48.32481807734863
-);
-//Retona a distância entre dois pontos ex: geo.calculaDistancia(lat,long,lat2,long2);
+geo.calculaDistancia([-23.985921638598054, -48.36790508155105],[ -24.013992511362666, -48.32481807734863]);
+//Retona a distância entre dois pontos ex: geo.calculaDistancia(Coordenadainical,CoordenadaFinal);
 
 geo.getRadiano(-23.985921638598054);
 //Converte Grau decimal em Radianos

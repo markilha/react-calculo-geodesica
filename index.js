@@ -1,4 +1,3 @@
-
 const datum = {
   sirgas: "Sirgas 2000",
   WGS84: "WGS 84",
@@ -14,19 +13,27 @@ const numCasas = {
 };
 
 //Calcula distância
-function calculaDistancia(lat1, lon1, lat2, lon2) {
-  var deg2rad = 0.017453292519943295; // === Math.PI / 180
-  var cos = Math.cos;
-  lat1 *= deg2rad;
-  lon1 *= deg2rad;
-  lat2 *= deg2rad;
-  lon2 *= deg2rad;
-  var diam = 12742; // Diameter of the earth in km (2 * 6371)
-  var dLat = lat2 - lat1;
-  var dLon = lon2 - lon1;
-  var a = (1 - cos(dLat) + (1 - cos(dLon)) * cos(lat1) * cos(lat2)) / 2;
+// function calculaDistancia(lat1, lon1, lat2, lon2) {
+//   var deg2rad = 0.017453292519943295; // === Math.PI / 180
+//   var cos = Math.cos;
+//   lat1 *= deg2rad;
+//   lon1 *= deg2rad;
+//   lat2 *= deg2rad;
+//   lon2 *= deg2rad;
+//   var diam = 12742; // Diameter of the earth in km (2 * 6371)
+//   var dLat = lat2 - lat1;
+//   var dLon = lon2 - lon1;
+//   var a = (1 - cos(dLat) + (1 - cos(dLon)) * cos(lat1) * cos(lat2)) / 2;
 
-  return diam * Math.asin(Math.sqrt(a)) * 1000;
+//   return diam * Math.asin(Math.sqrt(a)) * 1000;
+// }
+
+function calculaDistancia(CoordenadaInicial, CoordenadaFinal) {
+  let dista = 0;
+  let difX = CoordenadaInicial.X - CoordenadaFinal.X;
+  let difY = CoordenadaInicial.Y - CoordenadaFinal.Y;
+  dista = Math.abs(Math.sqrt(Math.pow(difX, 2) + Math.pow(difY, 2)));
+  return dista;
 }
 
 ///Convert coordenada
