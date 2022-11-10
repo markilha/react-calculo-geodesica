@@ -12,17 +12,27 @@ let test = (description, assertTest) => {
   });
 };
 
-test("testantdo calculo de distância", () => {
-  assert.equal(
-    calc.calculaDistancia(
-      -23.985921638598054,
-      -48.36790508155105,
-      -24.013992511362666,
-      -48.32481807734863
-    ),
-    "5375.831344658761"
-  );
-});
+describe("testando distância: ", () => {
+  const coord = [770937.020773682, 7342195.1680566855];
+  const coord2 = [656399.0835560936, 7377505.776444826];  
+
+  test("Coordenada UTM", () => {   
+    assert.equal(
+      calc.calculaDistancia(coord,coord2,calc.tipoCoordenada.UTM),
+      "119857.3240432176"
+    );
+  });
+
+  test("Coordenada DECIMAL", () => {  
+    assert.equal(
+      calc.calculaDistancia(coord,coord2,calc.tipoCoordenada.grauDecimal),
+      "6939164.9817129"
+    );
+  });
+
+})
+
+
 
 test("testantdo converter graus em radianos", () => {
   assert.equal(calc.getRadiano(-23.985921638598054), -0.41863330671888943);
@@ -113,19 +123,12 @@ describe("testando testando Azimute", () => {
 test("Testando ponto médio: ", () => {
   const coord = [770937.020773682, 7342195.1680566855];
   const coord2 = [656399.0835560936, 7377505.776444826];
-  assert.equal(    
-    calc.pontoMedio(coord, coord2).toString()
-    ,
-    [
-      7359850.472250756,
-      7359850.472250756
-    ]
+  assert.equal(
+    calc.pontoMedio(coord, coord2).toString(),
+    [7359850.472250756, 7359850.472250756]
   );
 });
 
 test("Converter GMS em Graus Decimal", () => {
-  assert.equal(
-    calc.convertGMS_Dec(),
-    287.13387222222224
-  );
+  assert.equal(calc.convertGMS_Dec(), 287.13387222222224);
 });

@@ -36,8 +36,21 @@ geo.converterUtm(-24.009166667521, -48.336666666667, geo.datum.sirgas);
 //     Y_Norte: 7342195.1680566855,
 // }
 
-geo.calculaDistancia([-23.985921638598054, -48.36790508155105],[ -24.013992511362666, -48.32481807734863]);
-//Retona a distância entre dois pontos ex: geo.calculaDistancia(Coordenadainical,CoordenadaFinal);
+const coord = [770937.020773682, 7342195.1680566855];
+const coord2 = [656399.0835560936, 7377505.776444826];
+geo.calculaDistancia(
+  [-23.985921638598054, -48.36790508155105],
+  [-24.013992511362666, -48.32481807734863],
+  geo.tipoCoordenada.UTM
+);
+//Retona a distância entre dois pontos(UTM ex: geo.calculaDistancia(Coordenadainical,CoordenadaFinal,  geo.tipoCoordenada.UTM);
+
+geo.calculaDistancia(
+  [-23.985921638598054, -48.36790508155105],
+  [-24.013992511362666, -48.32481807734863],
+  geo.tipoCoordenada.grauDecimal
+);
+//Retona a distância entre dois pontos(Grau Decimal) ex: geo.calculaDistancia(Coordenadainical,CoordenadaFinal  geo.tipoCoordenada.grauDecimal);
 
 geo.getRadiano(-23.985921638598054);
 //Converte Grau decimal em Radianos
@@ -78,7 +91,7 @@ geo.convertGMS_Dec("287° 08' 01,94''");
 | Propriedade      | Entrada                                 | Tipo   | Descrição                                |
 | ---------------- | --------------------------------------- | ------ | ---------------------------------------- |
 | converterUtm     | latitude,longitude                      | doble  | Retorna um objeto                        |
-| calculaDistancia | latitude,longitude,latitude2,longitude2 | doble  | Retorna distância (double)               |
+| calculaDistancia | coordenada1,coordenada2,tipo coordenada | doble  | Retorna distância (double)               |
 | getRadiano       | coordenada graus decimal                | doble  | Retorna grau radiano(double)             |
 | getGraus         | coordenada radiano                      | doble  | Retorna grau decimal(double)             |
 | getFusoMerediano | coordenada longitude grau decimal       | doble  | Retorna objeto json                      |
@@ -100,6 +113,11 @@ uma: 1,
 duas: 2,
 tres: 3,
 quadro: 4
+
+# geo.tipoCoordenada
+
+Decimal,
+UTM
 
 ## Licença
 
