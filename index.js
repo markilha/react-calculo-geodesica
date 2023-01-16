@@ -1,7 +1,14 @@
+
+var proj4 = require('proj4');
+
 const datum = {
   sirgas: "Sirgas 2000",
   WGS84: "WGS 84",
   Sad69: "Sad 69",
+};
+const hemi = {
+  south: "south",
+  north: "north" 
 };
 
 const numCasas = {
@@ -41,6 +48,12 @@ function calculaDistancia(
     var a = (1 - cos(dLat) + (1 - cos(dLon)) * cos(lat1) * cos(lat2)) / 2;
     return diam * Math.asin(Math.sqrt(a)) * 1000;
   }
+}
+///
+function calculateDistance(coord1, coord2) {
+  const dx = coord2[0] - coord1[0];
+  const dy = coord2[1] - coord1[1];
+  return Math.sqrt(dx*dx + dy*dy);
 }
 
 ///Convert coordenada
@@ -403,8 +416,22 @@ function formatarValor(valor) {
   return valor.toLocaleString("pt-BR");
 }
 
+function calculateDeflection(angle1, angle2) {
+  var deflection = angle2 - angle1;
+  return deflection;
+}
+function ConvertUtmDecimal(easting,northing,zone, hemisferio = hemi.south){
+  const source = `+proj=utm +zone=${zone} +${hemisferio}+ellps=WGS84 +datum=WGS84 +units=m +no_defs`;
+  var dest = '+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs';
+  var point = proj4(source, dest, [easting,northing]); 
+  return JSON.stringify(`{lat: ${point[1]},lng: ${point[0]}}`)
+}
+
+
+
 module.exports = {
   calculaDistancia,
+  calculateDistance,
   converterUtm,
   getRadiano,
   getGraus,
@@ -417,4 +444,6 @@ module.exports = {
   datum,
   numCasas,
   tipoCoordenada,
+  calculateDeflection,
+  ConvertUtmDecimal
 };

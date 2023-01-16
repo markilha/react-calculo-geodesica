@@ -43,7 +43,15 @@ geo.calculaDistancia(
   [-24.013992511362666, -48.32481807734863],
   geo.tipoCoordenada.UTM
 );
-//Retona a distância entre dois pontos(UTM ex: geo.calculaDistancia(Coordenadainical,CoordenadaFinal,  geo.tipoCoordenada.UTM);
+
+
+geo.ConvertUtmDecimal(656549.4211550002, -48.336666666667,22,hemisferio = hemi.south);
+resultado :{lat: -23.70554756706348,lng: -49.46444110715485}
+
+A função ConvertUtmDecimal é uma função JavaScript que converte coordenadas UTM (Universal Transverse Mercator) para coordenadas geográficas (latitude e longitude) em formato decimal. Ela usa o pacote proj4 para realizar essa conversão.
+
+A função aceita quatro parâmetros de entrada: "easting", "northing", "zone" e "hemisfério", sendo que "easting" e "northing" representam as coordenadas UTM e "zone" representa o número da zona UTM, e "hemisfério" é uma string que pode ser "north" ou "south", indicando o hemisfério onde as coordenadas UTM estão. Caso não seja especificado, o valor default é "south"
+
 
 geo.calculaDistancia(
   [-23.985921638598054, -48.36790508155105],
@@ -91,6 +99,7 @@ geo.convertGMS_Dec("287° 08' 01,94''");
 | Propriedade      | Entrada                                 | Tipo   | Descrição                                |
 | ---------------- | --------------------------------------- | ------ | ---------------------------------------- |
 | converterUtm     | latitude,longitude                      | doble  | Retorna um objeto                        |
+| ConvertUtmDecimal| latitude,longitude                      | doble  | Retorna um objeto                        |
 | calculaDistancia | coordenada1,coordenada2,tipo coordenada | doble  | Retorna distância (double)               |
 | getRadiano       | coordenada graus decimal                | doble  | Retorna grau radiano(double)             |
 | getGraus         | coordenada radiano                      | doble  | Retorna grau decimal(double)             |
@@ -99,6 +108,7 @@ geo.convertGMS_Dec("287° 08' 01,94''");
 | calcula Azimute  | array de coordeanadas                   | doble  | Retorna a Azimute (string)               |
 | pontoMedio       | array de coordeanadas                   | doble  | Retorna a ponto médio (array coordenada) |
 | convertGMS_Dec   | coordenada grau minutos e segundo       | string | Retorna a grau decimal (double)          |
+
 
 # geo.datum
 

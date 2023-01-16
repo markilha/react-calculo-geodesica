@@ -32,6 +32,13 @@ describe("testando distância: ", () => {
 
 })
 
+test('Calculo de distância entre dois pontos utm', () => {
+  const coord = [770937.020773682, 7342195.1680566855];
+  const coord2 = [656399.0835560936, 7377505.776444826];  
+  const expectedDistance = 119857.3240432176;
+  assert.equal(calc.calculateDistance(coord, coord2), expectedDistance);
+});
+
 
 
 test("testantdo converter graus em radianos", () => {
@@ -132,3 +139,16 @@ test("Testando ponto médio: ", () => {
 test("Converter GMS em Graus Decimal", () => {
   assert.equal(calc.convertGMS_Dec(), 287.13387222222224);
 });
+
+test('Retorna a deflexão entre dois angulos', () => {
+  assert.equal(calc.calculateDeflection(45, 90), 45);
+  assert.equal(calc.calculateDeflection(90, 45), -45);
+  assert.equal(calc.calculateDeflection(180, 0), -180);
+});
+
+test('Converte Utm em Decimal', () => {
+  assert.equal(JSON.stringify(calc.ConvertUtmDecimal(656549.4211550002,7377529.288316002,22)), '"\\"{lat: -23.70554756706348,lng: -49.46444110715485}\\""');
+});
+
+
+

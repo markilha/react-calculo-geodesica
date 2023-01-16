@@ -1,6 +1,6 @@
 {
   "name": "react-calculo-geodesico",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Calculos geodesicos",
   "main": "index.js",
   "repository": "https://github.com/markilha/react-calculo-geodesica",
@@ -14,6 +14,7 @@
     "Converter Radianos",
     "Converter Graus",
     "Converter coordenadas utm",
+    "Converter coordenas utm em geográfica decimal",
     "Ponto medio entre duas coordeanadas",
     "converter grau minuto e segundo em graus decimais"
   ],
@@ -22,5 +23,7 @@
     "assert": "^1.4.1",
     "mocha": "^5.1.1"
   },
-  "dependencies": {}
+  "dependencies": {
+    "proj4": "^2.8.1"
+  }
 }
